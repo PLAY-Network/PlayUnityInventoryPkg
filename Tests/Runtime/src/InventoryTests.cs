@@ -20,7 +20,7 @@ namespace RGN.Inventory.Tests.Runtime
                 "b14e64d4-52c2-4f8b-be65-a0161542c010",
                 new List<string>() { RGNCoreBuilder.I.AppIDForRequests });
 
-            var task = InventoryModule.I.AddToInventory(
+            var task = InventoryModule.I.AddToInventoryAsync(
                 "bb4717dd1bca471e9641afba1d428147",
                 inventoryItem);
             yield return task.AsIEnumeratorReturnNull();
@@ -39,7 +39,7 @@ namespace RGN.Inventory.Tests.Runtime
                 "053824c3-e523-433c-9009-51367f809137",
                 new List<string>() { RGNCoreBuilder.I.AppIDForRequests });
 
-            var task = InventoryModule.I.AddToInventory(
+            var task = InventoryModule.I.AddToInventoryAsync(
                 "bb4717dd1bca471e9641afba1d428147",
                 inventoryItem);
             yield return task.AsIEnumeratorReturnNull();
@@ -57,7 +57,7 @@ namespace RGN.Inventory.Tests.Runtime
             var virtualItemId = "b14e64d4-52c2-4f8b-be65-a0161542c010";
             var quantity = 32;
 
-            var task = InventoryModule.I.UpdateInventoryQuantity(virtualItemId, quantity);
+            var task = InventoryModule.I.UpdateInventoryQuantityAsync(virtualItemId, quantity);
             yield return task.AsIEnumeratorReturnNull();
             var result = task.Result;
 
@@ -71,14 +71,14 @@ namespace RGN.Inventory.Tests.Runtime
             string userId = RGNCoreBuilder.I.MasterAppUser.UserId;
             string virtualItemId = "053824c3-e523-433c-9009-51367f809137";
 
-            var task1 = InventoryModule.I.AddToInventory(
+            var task1 = InventoryModule.I.AddToInventoryAsync(
                 userId,
                 virtualItemId);
 
             yield return task1.AsIEnumeratorReturnNull();
             var result1 = task1.Result;
 
-            var task2 = InventoryModule.I.RemoveByOwnedItemId(
+            var task2 = InventoryModule.I.RemoveByOwnedItemIdAsync(
                 userId,
                 result1.id);
             yield return task2.AsIEnumeratorReturnNull();
@@ -95,12 +95,12 @@ namespace RGN.Inventory.Tests.Runtime
             string userId = RGNCoreBuilder.I.MasterAppUser.UserId;
             string virtualItemId = "92c7067d-cb58-4f3d-a545-36faf409d64c";
 
-            var task1 = InventoryModule.I.AddToInventory(
+            var task1 = InventoryModule.I.AddToInventoryAsync(
                 userId,
                 virtualItemId);
             yield return task1.AsIEnumeratorReturnNull();
 
-            var task = InventoryModule.I.RemoveByVirtualItemId(
+            var task = InventoryModule.I.RemoveByVirtualItemIdAsync(
                 userId,
                 virtualItemId);
             yield return task.AsIEnumeratorReturnNull();
@@ -117,7 +117,7 @@ namespace RGN.Inventory.Tests.Runtime
 
             var virtualItemId = "053824c3-e523-433c-9009-51367f809137";
 
-            var task = InventoryModule.I.GetUpgrades(virtualItemId);
+            var task = InventoryModule.I.GetUpgradesAsync(virtualItemId);
             yield return task.AsIEnumeratorReturnNull();
             var result = task.Result;
 
@@ -132,7 +132,7 @@ namespace RGN.Inventory.Tests.Runtime
 
             var ownedItemId = "hgy7jgfI5kuk37D0DX7j";
 
-            var task = InventoryModule.I.Upgrade(ownedItemId, 33);
+            var task = InventoryModule.I.UpgradeAsync(ownedItemId, 33);
             yield return task.AsIEnumeratorReturnNull();
             var result = task.Result;
 
@@ -146,7 +146,7 @@ namespace RGN.Inventory.Tests.Runtime
 
             var ownedItemId = "hgy7jgfI5kuk37D0DX7j";
 
-            var task = InventoryModule.I.Upgrade(ownedItemId, 42, "my_custom_upgrade_level");
+            var task = InventoryModule.I.UpgradeAsync(ownedItemId, 42, "my_custom_upgrade_level");
             yield return task.AsIEnumeratorReturnNull();
             var result = task.Result;
 
@@ -161,7 +161,7 @@ namespace RGN.Inventory.Tests.Runtime
             var ownedItemId = "cLKMibuMTFkA9m5BvBeg";
             var propertiesToSet = "{}";
 
-            var task = InventoryModule.I.SetProperties(ownedItemId, propertiesToSet);
+            var task = InventoryModule.I.SetPropertiesAsync(ownedItemId, propertiesToSet);
             yield return task.AsIEnumeratorReturnNull();
             var result = task.Result;
 
@@ -177,7 +177,7 @@ namespace RGN.Inventory.Tests.Runtime
             var ownedItemId = "cLKMibuMTFkA9m5BvBeg";
             var expectedProperties = "{}";
 
-            var task = InventoryModule.I.GetProperties(ownedItemId);
+            var task = InventoryModule.I.GetPropertiesAsync(ownedItemId);
             yield return task.AsIEnumeratorReturnNull();
             var result = task.Result;
 
@@ -192,7 +192,7 @@ namespace RGN.Inventory.Tests.Runtime
 
             var ownedItemId = "cLKMibuMTFkA9m5BvBeg";
 
-            var task = InventoryModule.I.GetById(ownedItemId);
+            var task = InventoryModule.I.GetByIdAsync(ownedItemId);
             yield return task.AsIEnumeratorReturnNull();
             var result = task.Result;
 
@@ -206,7 +206,7 @@ namespace RGN.Inventory.Tests.Runtime
 
             var appId = RGNCoreBuilder.I.AppIDForRequests;
 
-            var task = InventoryModule.I.GetByAppId(appId);
+            var task = InventoryModule.I.GetByAppIdAsync(appId);
             yield return task.AsIEnumeratorReturnNull();
             var result = task.Result;
 
@@ -220,7 +220,7 @@ namespace RGN.Inventory.Tests.Runtime
 
             var appIds = new List<string>() { RGNCoreBuilder.I.AppIDForRequests };
 
-            var task = InventoryModule.I.GetByAppIds(appIds);
+            var task = InventoryModule.I.GetByAppIdsAsync(appIds);
             yield return task.AsIEnumeratorReturnNull();
             var result = task.Result;
 
@@ -235,7 +235,7 @@ namespace RGN.Inventory.Tests.Runtime
 
             var virtualItemIds = new List<string>() { "053824c3-e523-433c-9009-51367f809137" };
 
-            var task = InventoryModule.I.GetByVirtualItemIds(virtualItemIds);
+            var task = InventoryModule.I.GetByVirtualItemIdsAsync(virtualItemIds);
             yield return task.AsIEnumeratorReturnNull();
             var result = task.Result;
 
@@ -250,7 +250,7 @@ namespace RGN.Inventory.Tests.Runtime
 
             var virtualItemIds = new List<string>() { "non_existing_virtual_item_id" };
 
-            var task = InventoryModule.I.GetByVirtualItemIds(virtualItemIds);
+            var task = InventoryModule.I.GetByVirtualItemIdsAsync(virtualItemIds);
             yield return task.AsIEnumeratorReturnNull();
             var result = task.Result;
 
@@ -266,7 +266,7 @@ namespace RGN.Inventory.Tests.Runtime
             var ownedItemIds = new List<string>() {
                 "cLKMibuMTFkA9m5BvBeg", "kTfNdxPNN6KpPAFTZBKv" };
 
-            var task = InventoryModule.I.GetByIds(ownedItemIds);
+            var task = InventoryModule.I.GetByIdsAsync(ownedItemIds);
             yield return task.AsIEnumeratorReturnNull();
             var result = task.Result;
 
@@ -282,7 +282,7 @@ namespace RGN.Inventory.Tests.Runtime
             var ownedItemIds = new List<string>() {
                 "non_existing_owned_item_id_one", "non_existing_owned_item_id_two" };
 
-            var task = InventoryModule.I.GetByIds(ownedItemIds);
+            var task = InventoryModule.I.GetByIdsAsync(ownedItemIds);
             yield return task.AsIEnumeratorReturnNull();
             var result = task.Result;
 
@@ -298,7 +298,7 @@ namespace RGN.Inventory.Tests.Runtime
             var ownedItemIds = new List<string>() {
                 "non_existing_owned_item_id_one", "kTfNdxPNN6KpPAFTZBKv", "non_existing_owned_item_id_two" };
 
-            var task = InventoryModule.I.GetByIds(ownedItemIds);
+            var task = InventoryModule.I.GetByIdsAsync(ownedItemIds);
             yield return task.AsIEnumeratorReturnNull();
             var result = task.Result;
 
