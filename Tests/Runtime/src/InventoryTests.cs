@@ -227,7 +227,22 @@ namespace RGN.Inventory.Tests.Runtime
             Assert.NotNull(result, "The result is null");
             UnityEngine.Debug.Log(result);
         }
-
+        [UnityTest]
+        public IEnumerator GetWithVirtualItemsDataByAppIdsAsync_ReturnsArrayOfOffers()
+        {
+            yield return LoginAsNormalTester();
+            
+            var appIdsToFind = new[] { "GetWithVirtualItemsDataByAppIdsAsync_ReturnsArrayOfOffers" };
+            
+            var getByAppIdsTask = InventoryModule.I.GetWithVirtualItemsDataByAppIdsAsync(appIdsToFind);
+            yield return getByAppIdsTask.AsIEnumeratorReturnNull();
+            var getByAppIdsResult = getByAppIdsTask.Result;
+            
+            Assert.IsNotNull(getByAppIdsResult);
+            Assert.IsNotNull(getByAppIdsResult.items);
+            Assert.IsNotEmpty(getByAppIdsResult.items);
+            Assert.AreEqual(getByAppIdsResult.items[0].virtualItemId, getByAppIdsResult.items[0].Item.id);
+        }
         [UnityTest]
         public IEnumerator GetByVirtualItemIds_ReturnsData()
         {
