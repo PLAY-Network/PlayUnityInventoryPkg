@@ -241,7 +241,7 @@ namespace RGN.Inventory.Tests.Runtime
             Assert.IsNotNull(getByAppIdsResult);
             Assert.IsNotNull(getByAppIdsResult.items);
             Assert.IsNotEmpty(getByAppIdsResult.items);
-            Assert.AreEqual(getByAppIdsResult.items[0].virtualItemId, getByAppIdsResult.items[0].Item.id);
+            Assert.AreEqual(getByAppIdsResult.items[0].virtualItemId, getByAppIdsResult.items[0].GetItem().id);
         }
         [UnityTest]
         public IEnumerator GetByVirtualItemIds_ReturnsData()
