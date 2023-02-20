@@ -16,7 +16,7 @@ namespace RGN.Inventory.Tests.Runtime
         {
             yield return LoginAsAdminTester();
 
-            var inventoryItem = new VirtualItemInventoryData(
+            var inventoryItem = new InventoryItemData(
                 "b14e64d4-52c2-4f8b-be65-a0161542c010",
                 new List<string>() { RGNCoreBuilder.I.AppIDForRequests });
 
@@ -35,7 +35,7 @@ namespace RGN.Inventory.Tests.Runtime
         {
             yield return LoginAsAdminTester();
 
-            var inventoryItem = new VirtualItemInventoryData(
+            var inventoryItem = new InventoryItemData(
                 "053824c3-e523-433c-9009-51367f809137",
                 new List<string>() { RGNCoreBuilder.I.AppIDForRequests });
 
@@ -122,8 +122,7 @@ namespace RGN.Inventory.Tests.Runtime
             var result = task.Result;
 
             Assert.NotNull(result, "The result is null");
-            Assert.NotNull(result.upgradesInfoArray, "The upgradesInfoArray is null");
-            Assert.IsNotEmpty(result.upgradesInfoArray);
+            Assert.IsNotEmpty(result);
         }
         [UnityTest]
         public IEnumerator UpgradeWithDefaultUpgradeId_ReturnsArrayOfUpgrades()
@@ -232,16 +231,15 @@ namespace RGN.Inventory.Tests.Runtime
         {
             yield return LoginAsNormalTester();
             
-            var appIdsToFind = new[] { "GetWithVirtualItemsDataByAppIdsAsync_ReturnsArrayOfOffers" };
+            var appIdsToFind = new List<string> { "GetWithVirtualItemsDataByAppIdsAsync_ReturnsArrayOfOffers" };
             
             var getByAppIdsTask = InventoryModule.I.GetWithVirtualItemsDataByAppIdsAsync(appIdsToFind);
             yield return getByAppIdsTask.AsIEnumeratorReturnNull();
             var getByAppIdsResult = getByAppIdsTask.Result;
-            
+
             Assert.IsNotNull(getByAppIdsResult);
-            Assert.IsNotNull(getByAppIdsResult.items);
-            Assert.IsNotEmpty(getByAppIdsResult.items);
-            Assert.AreEqual(getByAppIdsResult.items[0].virtualItemId, getByAppIdsResult.items[0].GetItem().id);
+            Assert.IsNotEmpty(getByAppIdsResult);
+            Assert.AreEqual(getByAppIdsResult[0].virtualItemId, getByAppIdsResult[0].GetItem().id);
         }
         [UnityTest]
         public IEnumerator GetByVirtualItemIds_ReturnsData()
@@ -255,7 +253,7 @@ namespace RGN.Inventory.Tests.Runtime
             var result = task.Result;
 
             Assert.NotNull(result, "The result is null");
-            Assert.AreNotEqual(0, result.items.Count);
+            Assert.AreNotEqual(0, result.Count);
             UnityEngine.Debug.Log(result);
         }
         [UnityTest]
@@ -270,7 +268,7 @@ namespace RGN.Inventory.Tests.Runtime
             var result = task.Result;
 
             Assert.NotNull(result, "The result is null");
-            Assert.AreEqual(0, result.items.Count);
+            Assert.AreEqual(0, result.Count);
             UnityEngine.Debug.Log(result);
         }
         [UnityTest]
@@ -286,7 +284,7 @@ namespace RGN.Inventory.Tests.Runtime
             var result = task.Result;
 
             Assert.NotNull(result, "The result is null");
-            Assert.AreNotEqual(0, result.items.Count);
+            Assert.AreNotEqual(0, result.Count);
             UnityEngine.Debug.Log(result);
         }
         [UnityTest]
@@ -302,7 +300,7 @@ namespace RGN.Inventory.Tests.Runtime
             var result = task.Result;
 
             Assert.NotNull(result, "The result is null");
-            Assert.AreEqual(0, result.items.Count);
+            Assert.AreEqual(0, result.Count);
             UnityEngine.Debug.Log(result);
         }
         [UnityTest]
@@ -318,7 +316,7 @@ namespace RGN.Inventory.Tests.Runtime
             var result = task.Result;
 
             Assert.NotNull(result, "The result is null");
-            Assert.AreEqual(1, result.items.Count);
+            Assert.AreEqual(1, result.Count);
             UnityEngine.Debug.Log(result);
         }
 
