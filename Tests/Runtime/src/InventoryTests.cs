@@ -115,7 +115,7 @@ namespace RGN.Inventory.Tests.Runtime
         {
             yield return LoginAsNormalTester();
 
-            var ownedItemId = "hgy7jgfI5kuk37D0DX7j";
+            var ownedItemId = "yRT1RXlePdlmDehgPiKf";
 
             var task = InventoryModule.I.UpgradeAsync(ownedItemId, 33);
             yield return task.AsIEnumeratorReturnNull();
@@ -129,7 +129,7 @@ namespace RGN.Inventory.Tests.Runtime
         {
             yield return LoginAsNormalTester();
 
-            var ownedItemId = "hgy7jgfI5kuk37D0DX7j";
+            var ownedItemId = "8298Sa57hYHdakmbRIv7";
 
             var task = InventoryModule.I.UpgradeAsync(ownedItemId, 42, "my_custom_upgrade_level");
             yield return task.AsIEnumeratorReturnNull();
@@ -143,7 +143,7 @@ namespace RGN.Inventory.Tests.Runtime
         {
             yield return LoginAsNormalTester();
 
-            var ownedItemId = "cLKMibuMTFkA9m5BvBeg";
+            var ownedItemId = "lFY2aQhWfjf9EiJZsyI1";
             var propertiesToSet = "{}";
 
             var task = InventoryModule.I.SetPropertiesAsync(ownedItemId, propertiesToSet);
@@ -159,7 +159,7 @@ namespace RGN.Inventory.Tests.Runtime
         {
             yield return LoginAsNormalTester();
 
-            var ownedItemId = "cLKMibuMTFkA9m5BvBeg";
+            var ownedItemId = "lFY2aQhWfjf9EiJZsyI1";
             var expectedProperties = "{}";
 
             var task = InventoryModule.I.GetPropertiesAsync(ownedItemId);
@@ -175,7 +175,7 @@ namespace RGN.Inventory.Tests.Runtime
         {
             yield return LoginAsNormalTester();
 
-            var ownedItemId = "cLKMibuMTFkA9m5BvBeg";
+            var ownedItemId = "yRT1RXlePdlmDehgPiKf";
 
             var task = InventoryModule.I.GetByIdAsync(ownedItemId);
             yield return task.AsIEnumeratorReturnNull();
@@ -211,11 +211,11 @@ namespace RGN.Inventory.Tests.Runtime
             UnityEngine.Debug.Log(result);
         }
         [UnityTest]
-        public IEnumerator GetWithVirtualItemsDataByAppIdsAsync_ReturnsArrayOfOffers()
+        public IEnumerator GetWithVirtualItemsDataByAppIdsAsync_ReturnsNotNullVirtualItem()
         {
             yield return LoginAsNormalTester();
             
-            var appIdsToFind = new List<string> { "GetWithVirtualItemsDataByAppIdsAsync_ReturnsArrayOfOffers" };
+            var appIdsToFind = new List<string> { "io.getready.rgntest" };
             
             var getByAppIdsTask = InventoryModule.I.GetWithVirtualItemsDataByAppIdsAsync(appIdsToFind);
             yield return getByAppIdsTask.AsIEnumeratorReturnNull();
@@ -223,6 +223,7 @@ namespace RGN.Inventory.Tests.Runtime
 
             Assert.IsNotNull(getByAppIdsResult);
             Assert.IsNotEmpty(getByAppIdsResult);
+            Assert.IsNotNull(getByAppIdsResult[0].GetItem());
             Assert.AreEqual(getByAppIdsResult[0].virtualItemId, getByAppIdsResult[0].GetItem().id);
         }
         [UnityTest]
@@ -261,7 +262,7 @@ namespace RGN.Inventory.Tests.Runtime
             yield return LoginAsNormalTester();
 
             var ownedItemIds = new List<string>() {
-                "cLKMibuMTFkA9m5BvBeg", "kTfNdxPNN6KpPAFTZBKv" };
+                "Cqxfvx5fBAuqcY9IINBW", "lFY2aQhWfjf9EiJZsyI1" };
 
             var task = InventoryModule.I.GetByIdsAsync(ownedItemIds);
             yield return task.AsIEnumeratorReturnNull();
@@ -293,7 +294,7 @@ namespace RGN.Inventory.Tests.Runtime
             yield return LoginAsNormalTester();
 
             var ownedItemIds = new List<string>() {
-                "non_existing_owned_item_id_one", "kTfNdxPNN6KpPAFTZBKv", "non_existing_owned_item_id_two" };
+                "non_existing_owned_item_id_one", "lFY2aQhWfjf9EiJZsyI1", "non_existing_owned_item_id_two" };
 
             var task = InventoryModule.I.GetByIdsAsync(ownedItemIds);
             yield return task.AsIEnumeratorReturnNull();
