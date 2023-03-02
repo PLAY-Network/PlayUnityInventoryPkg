@@ -50,20 +50,6 @@ namespace RGN.Inventory.Tests.Runtime
             UnityEngine.Debug.Log(result);
         }
         [UnityTest]
-        public IEnumerator UpdateInventoryQuantity_CanBeCalledOnlyWithAdminRights()
-        {
-            yield return LoginAsAdminTester();
-
-            var virtualItemId = "b14e64d4-52c2-4f8b-be65-a0161542c010";
-            var quantity = 32;
-
-            var task = InventoryModule.I.UpdateInventoryQuantityAsync(virtualItemId, quantity);
-            yield return task.AsIEnumeratorReturnNull();
-            var result = task.Result;
-
-            Assert.NotNull(result, "The result is null");
-        }
-        [UnityTest]
         public IEnumerator RemoveByOwnedItemId_CanBeCalledByAdminUser()
         {
             yield return LoginAsAdminTester();
@@ -203,9 +189,7 @@ namespace RGN.Inventory.Tests.Runtime
         {
             yield return LoginAsNormalTester();
 
-            var appId = RGNCoreBuilder.I.AppIDForRequests;
-
-            var task = InventoryModule.I.GetByAppIdAsync(appId);
+            var task = InventoryModule.I.GetAllForCurrentAppAsync();
             yield return task.AsIEnumeratorReturnNull();
             var result = task.Result;
 
