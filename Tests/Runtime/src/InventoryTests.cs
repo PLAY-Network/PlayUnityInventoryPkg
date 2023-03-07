@@ -57,16 +57,12 @@ namespace RGN.Inventory.Tests.Runtime
             string userId = RGNCoreBuilder.I.MasterAppUser.UserId;
             string virtualItemId = "053824c3-e523-433c-9009-51367f809137";
 
-            var task1 = InventoryModule.I.AddToInventoryAsync(
-                userId,
-                virtualItemId);
+            var task1 = InventoryModule.I.AddToInventoryAsync(virtualItemId);
 
             yield return task1.AsIEnumeratorReturnNull();
             var result1 = task1.Result;
 
-            var task2 = InventoryModule.I.RemoveByOwnedItemIdAsync(
-                userId,
-                result1.id);
+            var task2 = InventoryModule.I.RemoveByOwnedItemIdAsync(result1.id, 1);
             yield return task2.AsIEnumeratorReturnNull();
             var result2 = task2.Result;
 
