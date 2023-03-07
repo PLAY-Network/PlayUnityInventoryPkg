@@ -50,7 +50,7 @@ namespace RGN.Inventory.Tests.Runtime
             UnityEngine.Debug.Log(result);
         }
         [UnityTest]
-        public IEnumerator RemoveByOwnedItemId_CanBeCalledByAdminUser()
+        public IEnumerator RemoveByInventoryItemId_CanBeCalledByAdminUser()
         {
             yield return LoginAsAdminTester();
 
@@ -62,7 +62,7 @@ namespace RGN.Inventory.Tests.Runtime
             yield return task1.AsIEnumeratorReturnNull();
             var result1 = task1.Result;
 
-            var task2 = InventoryModule.I.RemoveByOwnedItemIdAsync(result1.id, 1);
+            var task2 = InventoryModule.I.RemoveByInventoryItemIdAsync(result1.id, 1);
             yield return task2.AsIEnumeratorReturnNull();
             var result2 = task2.Result;
 
