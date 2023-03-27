@@ -39,8 +39,14 @@ namespace RGN.Samples
         [SerializeField] private LoadingIndicator _fullScreenLoadingIndicator;
         [SerializeField] private IconImage _virtualItemIconImage;
         [SerializeField] private RectTransform _scrollRectContent;
-        [SerializeField] private RectTransform _buyButtonsAnchor;
-        [SerializeField] private GameObject _nftIconGameObject;
+        [SerializeField] private UnityEngine.UI.Image _isNFTImage;
+        [SerializeField] private UnityEngine.UI.Image _isStackableImage;
+        [SerializeField] private TextMeshProUGUI _inventoryItemIdText;
+        [SerializeField] private TextMeshProUGUI _inventoryItemTagsText;
+        [SerializeField] private TextMeshProUGUI _inventoryItemAppIdsText;
+        [SerializeField] private TextMeshProUGUI _inventoryItemQuantityText;
+        [SerializeField] private TextMeshProUGUI _inventoryItemUpgradesText;
+        [SerializeField] private TextMeshProUGUI _inventoryItemPropertiesText;
 
         private InventoryItemData _inventoryItemData;
         private VirtualItem _virtualItem;
@@ -76,11 +82,19 @@ namespace RGN.Samples
             _createdByText.text = _virtualItem.createdBy;
             _updatedByText.text = _virtualItem.updatedBy;
             _isStackableText.text = _virtualItem.isStackable ? "Item is stackable" : "Item is not stackable";
-            _tagsText.text = BuildStringFromStringsList(_virtualItem.tags, "tags");
-            _appIdsText.text = BuildStringFromStringsList(_virtualItem.appIds, "app ids");
-            _childIdsText.text = BuildStringFromStringsList(_virtualItem.childs, "virtual item childs");
-            _propertiesText.text = BuildStringFromPropertiesList(_virtualItem.properties);
-            _nftIconGameObject.SetActive(_virtualItem.IsNFT());
+            _tagsText.text = StringsUtility.BuildStringFromStringsList(_virtualItem.tags, "tags");
+            _appIdsText.text = StringsUtility.BuildStringFromStringsList(_virtualItem.appIds, "app ids");
+            _childIdsText.text = StringsUtility.BuildStringFromStringsList(_virtualItem.childs, "virtual item childs");
+            _propertiesText.text = Properties.BuildStringFromPropertiesList(_virtualItem.properties);
+            _isNFTImage.color = _virtualItem.IsNFT() ? RGNUISettings.I.ActiveColor : Color.gray;
+            _isStackableImage.color = _virtualItem.isStackable ? RGNUISettings.I.ActiveColor : Color.gray;
+            _inventoryItemIdText.text = _inventoryItemData.id;
+            _inventoryItemTagsText.text = StringsUtility.BuildStringFromStringsList(_inventoryItemData.tags, "tags");
+            _inventoryItemAppIdsText.text = StringsUtility.BuildStringFromStringsList(_inventoryItemData.appIds, "appIds");
+            _inventoryItemQuantityText.text = _inventoryItemData.quantity.ToString();
+            _inventoryItemUpgradesText.text = VirtualItemUpgrade.BuildStringFromUpgradesList(_inventoryItemData.itemUpgrades);
+            _inventoryItemPropertiesText.text = Properties.BuildStringFromPropertiesList(_inventoryItemData.properties);
+
             _fullScreenLoadingIndicator.SetEnabled(false);
             await LoadIconImageAsync(_virtualItem.id, false);
         }
@@ -117,41 +131,6 @@ namespace RGN.Samples
             _virtualItemIconImage.SetProfileTexture(image);
             _canvasGroup.interactable = true;
             _virtualItemIconImage.SetLoading(false);
-        }
-
-        private string BuildStringFromStringsList(List<string> strings, string name)
-        {
-            if (strings == null || strings.Count == 0)
-            {
-                return $"No {name} set";
-            }
-            var sb = new System.Text.StringBuilder();
-            for (int i = 0; i < strings.Count; i++)
-            {
-                sb.Append(strings[i]);
-                if (i < strings.Count - 1)
-                {
-                    sb.Append(", ");
-                }
-            }
-            return sb.ToString();
-        }
-        private string BuildStringFromPropertiesList(List<Properties> properties)
-        {
-            if (properties == null || properties.Count == 0)
-            {
-                return "No properties set";
-            }
-            var sb = new System.Text.StringBuilder();
-            for (int i = 0; i < properties.Count; ++i)
-            {
-                var property = properties[i];
-                sb.Append("Properties for apps: ");
-                sb.Append(BuildStringFromStringsList(property.appIds, "app ids"));
-                sb.AppendLine(string.IsNullOrWhiteSpace(property.json) ? " are not set." : " are set to: ");
-                sb.AppendLine(property.json);
-            }
-            return sb.ToString();
         }
     }
 }

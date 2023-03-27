@@ -78,7 +78,7 @@ namespace RGN.Samples
         {
             SetUIInteractable(false);
             _triedToLoad = true;
-            var inventoryItems = await InventoryModule.I.GetWithVirtualItemsDataForCurrentAppAsync();
+            var inventoryItems = await InventoryModule.I.GetWithVirtualItemsDataForCurrentAppAsync(startAfter);
             for (int i = 0; i < inventoryItems.Count; ++i)
             {
                 InventoryItemUI ui = Instantiate(_inventoryItemPrefab, _scrollContentRectTrasform);
