@@ -400,7 +400,6 @@ MonoBehaviour:
   _fullScreenLoadingIndicator: {fileID: 1035209998819438977}
   _virtualItemIconImage: {fileID: 3133269572940501040}
   _scrollRectContent: {fileID: 3460223781751629590}
-  _buyButtonsAnchor: {fileID: 0}
   _isNFTImage: {fileID: 8081560002209159560}
   _isStackableImage: {fileID: 214746250690210122}
   _inventoryItemIdText: {fileID: 8001480632559158584}
@@ -2969,7 +2968,7 @@ GameObject:
   - component: {fileID: 6110335773828118376}
   - component: {fileID: 6507745092271532271}
   m_Layer: 5
-  m_Name: VirtualItemsScrollView
+  m_Name: InventoryItemsScrollView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3039,6 +3038,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _reloadImagePrefab: {fileID: 5322230921392865710, guid: 9a8c25b81392f83478434c81b478f346, type: 3}
   _refreshDistance: 100
+  _rotationSpeed: 300
 --- !u!1 &5490013005276100970
 GameObject:
   m_ObjectHideFlags: 0
