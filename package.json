@@ -23,7 +23,17 @@
     "/package.json",
     "/package.json.meta",
     "/ReadyGamesNetwork",
-    "/ReadyGamesNetwork.meta"
+    "/ReadyGamesNetwork.meta",
+    "/Samples",
+    "/Samples.meta",
+    "/Samples~"
+  ],
+  "samples": [
+    {
+      "displayName": "Inventory Example",
+      "description": "Contains prefab and scene to load users inventory",
+      "path": "Samples~/InventoryExample"
+    }
   ],
   "dependencies": {
     "io.getready.rgn.core": "0.1.0",

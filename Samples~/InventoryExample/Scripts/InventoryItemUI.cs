@@ -12,12 +12,16 @@ namespace RGN.Samples
         public string Id { get => _virtualItem.id; }
 
         [SerializeField] private RectTransform _rectTransform;
-        [SerializeField] private TextMeshProUGUI _idText;
+        [SerializeField] private TextMeshProUGUI _inventoryItemIdText;
+        [SerializeField] private TextMeshProUGUI _virtualItemIdText;
         [SerializeField] private TextMeshProUGUI _nameText;
         [SerializeField] private TextMeshProUGUI _createdAtText;
         [SerializeField] private TextMeshProUGUI _updatedAtText;
         [SerializeField] private TextMeshProUGUI _descriptionText;
-        [SerializeField] private GameObject _nftIconGameObject;
+        [SerializeField] private TextMeshProUGUI _quantityText;
+        [SerializeField] private Image _isNFTItemImage;
+        [SerializeField] private Image _isStackableItemImage;
+        [SerializeField] private Color _isActiveColor;
 
         [SerializeField] private Button _openVirtualItemScreenButton;
 
@@ -35,16 +39,15 @@ namespace RGN.Samples
             _inventoryItemData = inventoryItemData;
             _virtualItem = inventoryItemData.GetItem();
             _rectTransform.localPosition = new Vector3(0, -index * GetHeight(), 0);
-            _idText.text = _virtualItem.id;
+            _inventoryItemIdText.text = inventoryItemData.id;
+            _virtualItemIdText.text = _virtualItem.id;
+            _quantityText.text = inventoryItemData.quantity.ToString();
             _nameText.text = _virtualItem.name;
             _createdAtText.text = DateTimeUtility.UnixTimeStampToISOLikeStringNoMilliseconds(_virtualItem.createdAt);
             _updatedAtText.text = DateTimeUtility.UnixTimeStampToISOLikeStringNoMilliseconds(_virtualItem.updatedAt);
             _descriptionText.text = _virtualItem.description;
-            _nftIconGameObject.SetActive(_virtualItem.IsNFT());
-            if (!_virtualItem.IsNFT())
-            {
-                _nameText.rectTransform.anchoredPosition = Vector2.right * 4;
-            }
+            _isNFTItemImage.color = _virtualItem.IsNFT() ? _isActiveColor : Color.gray;
+            _isStackableItemImage.color = _virtualItem.isStackable ? _isActiveColor : Color.gray;
             _openVirtualItemScreenButton.onClick.AddListener(OnOpenVirtualItemScreenButtonClick);
         }
         public void Dispose()
@@ -68,11 +71,8 @@ namespace RGN.Samples
 
         private void OnOpenVirtualItemScreenButtonClick()
         {
-            Debug.Log("Open Virtual Item Screen");
-            //_rgnFrame.OpenScreen<VirtualItemScreen>(
-            //    new VirtualItemScreenParameters(
-            //        _virtualItem,
-            //        _virtualItemsExampleClient));
+            _rgnFrame.OpenScreen<InventoryItemScreen>(
+                new InventoryItemScreenParameters(_inventoryItemData));
         }
     }
 }
