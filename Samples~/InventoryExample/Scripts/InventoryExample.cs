@@ -67,12 +67,12 @@ namespace RGN.Samples
         }
         private async void OnLoadMoreItemsButtonAsync()
         {
-            string lastLoadedVirtualItemId = string.Empty;
+            string lastLoadedInventoryItemId = string.Empty;
             if (_inventoryItems.Count > 0)
             {
-                lastLoadedVirtualItemId = _inventoryItems[_inventoryItems.Count - 1].Id;
+                lastLoadedInventoryItemId = _inventoryItems[_inventoryItems.Count - 1].Id;
             }
-            await LoadItemsAsync(lastLoadedVirtualItemId);
+            await LoadItemsAsync(lastLoadedInventoryItemId);
         }
         private async Task LoadItemsAsync(string startAfter)
         {
