@@ -108,8 +108,8 @@ namespace RGN.Samples
             }
             else if (topic == InventoryModule.ITEM_REMOVED_EVENT_TOPIC)
             {
-                var payload = InventoryModule.I.ParseInventoryItemData(message.Payload);
-                ToastMessage.I.Show("Inventory item removed: " + payload.id);
+                var payload = InventoryModule.I.ParseInventoryItemsData(message.Payload);
+                ToastMessage.I.Show("Inventory items removed count: " + payload.Count);
             }
         }
     }
