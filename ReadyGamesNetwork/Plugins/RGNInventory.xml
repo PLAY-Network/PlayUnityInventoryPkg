@@ -1,0 +1,184 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RGNInventory</name>
+    </assembly>
+    <members>
+        <member name="F:RGN.Modules.Inventory.InventoryModule.ITEM_ADDED_EVENT_TOPIC">
+            <summary>
+            This topic event is fired for signed in user when a new inventory item
+            is added to the users inventory. It is not fired when the user purchases an item.
+            Name of the topic for MessagingModule to subscribe on.
+            You can use MessagingModule to subscribe on this event.
+            Please use the <see cref="M:RGN.Modules.Inventory.InventoryModule.ParseInventoryItemData(System.String)"/> method to parse the message payload
+            </summary>
+        </member>
+        <member name="F:RGN.Modules.Inventory.InventoryModule.ITEM_REMOVED_EVENT_TOPIC">
+            <summary>
+            This topic event is fired for signed in user when an inventory item is removed
+            from the users inventory.
+            Name of the topic for MessagingModule to subscribe on.
+            You can use MessagingModule to subscribe on this event.
+            Please use the <see cref="M:RGN.Modules.Inventory.InventoryModule.ParseInventoryItemsData(System.String)"/> method to parse the message payload
+            </summary>
+        </member>
+        <member name="M:RGN.Modules.Inventory.InventoryModule.GetPropertiesAsync(System.String)">
+            <summary>
+            Returns json string or throws an exception if there are no json for virtual item
+            </summary>
+            <param name="ownedItemId"></param>
+            <returns>Returns json as string</returns>
+        </member>
+        <member name="M:RGN.Modules.Inventory.InventoryModule.SetPropertiesAsync(System.String,System.String)">
+            <summary>
+            Set json on a given ownedItemId. 
+            </summary>
+            <param name="ownedItemId"></param>
+            <param name="json"></param>
+            <returns>Returns json as string</returns>
+        </member>
+        <member name="M:RGN.Modules.Inventory.InventoryModule.GetUpgradesAsync(System.String)">
+            <summary>
+            Get user owned item upgrades, returns all upgrades for all owned items for virtual item ownedItemId
+            </summary>
+            <param name="ownedItemId">The ownedItemId of the virtual item to search in inventory for</param>
+            <returns></returns>
+        </member>
+        <member name="M:RGN.Modules.Inventory.InventoryModule.UpgradeAsync(System.String,System.Int32,System.String)">
+            <summary>
+            Upgrades user owned virtual item to a new level
+            </summary>
+            <param name="ownedItemId">The ownedItemId of the owned inventory item</param>
+            <param name="newUpgradeLevel">New upgrade level for the owned virtual item</param>
+            <param name="upgradeId">Optional parameter for upgrade ownedItemId. One owned item can have multiple upgrades
+            with different ids. By default the upgradeId is 'default'</param>
+            <returns></returns>
+        </member>
+        <member name="M:RGN.Modules.Inventory.InventoryModule.GetByIdAsync(System.String)">
+            <summary>
+            Get single owned virtual item inventory data by ownedItemId
+            </summary>
+            <param name="ownedItemId">The id of the owned item in users inventory</param>
+            <returns></returns>
+        </member>
+        <member name="M:RGN.Modules.Inventory.InventoryModule.GetByIdsAsync(System.Collections.Generic.List{System.String})">
+            <summary>
+            Get owned virtual items inventory data by ownedItemIds
+            Returns empty if non of the items ids exist for current user
+            </summary>
+            <param name="ownedItemIds">The ids collection of the owned items in users inventory</param>
+            <returns></returns>
+        </member>
+        <member name="M:RGN.Modules.Inventory.InventoryModule.GetByVirtualItemIdsAsync(System.Collections.Generic.List{System.String})">
+            <summary>
+            Get multiple owned virtual items inventory data by virtual items ids
+            </summary>
+            <param name="virtualItemIds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RGN.Modules.Inventory.InventoryModule.GetAllForCurrentAppAsync">
+            <summary>
+            Get multiple owned virtual items inventory data for current app
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RGN.Modules.Inventory.InventoryModule.GetByAppIdsAsync(System.Collections.Generic.List{System.String})">
+            <summary>
+            Get multiple owned virtual items inventory data by app ids
+            </summary>
+            <param name="appIds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RGN.Modules.Inventory.InventoryModule.GetWithVirtualItemsDataForCurrentAppAsync(System.String,System.Int32)">
+            <summary>
+            Get multiple owned virtual items inventory data for current app with the Virtual Item data included
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RGN.Modules.Inventory.InventoryModule.GetWithVirtualItemsDataByAppIdsAsync(System.Collections.Generic.List{System.String},System.String,System.Int32)">
+            <summary>
+            Get multiple owned virtual items inventory data by app ids with the Virtual Item data included
+            </summary>
+            <param name="appIds"></param>
+            <param name="startAfter"></param>
+            <param name="limit"></param>
+            <returns></returns>
+        </member>
+        <member name="T:RGN.Modules.Inventory.InventoryItemData">
+            <summary>
+            Base inventory structure
+            </summary>
+        </member>
+        <member name="F:RGN.Modules.Inventory.InventoryItemData.id">
+            <summary>
+            Unique id of the inventory item
+            </summary>
+        </member>
+        <member name="F:RGN.Modules.Inventory.InventoryItemData.virtualItemId">
+            <summary>
+            The Virtual Item id for this inventory item
+            </summary>
+        </member>
+        <member name="F:RGN.Modules.Inventory.InventoryItemData.appIds">
+            <summary>
+            List of application ids where this item is used
+            </summary>
+        </member>
+        <member name="F:RGN.Modules.Inventory.InventoryItemData.tags">
+            <summary>
+            List of tags to filter the offers
+            You can place multiple inventory items into one category tag
+            For example in a shooter game: "guns", "rifles"
+            Later in the UI you can get only inventory items for specific tag
+            </summary>
+        </member>
+        <member name="F:RGN.Modules.Inventory.InventoryItemData.quantity">
+            <summary>
+            How many items the user have in inventory
+            If the Virtual Item is non stackable, then this value should be
+            always one
+            For stackable Virtual Items it represents the count of Virtual Items
+            in user inventory.
+            </summary>
+        </member>
+        <member name="F:RGN.Modules.Inventory.InventoryItemData.itemUpgrades">
+            <summary>
+            The upgrades for non stackable virtual item
+            The user can upgrade the Virtual Items he owns
+            The upgrades can change some of the json of Virtual Items
+            It is possible to have multiple upgrades with different names and values
+            for one item.
+            </summary>
+        </member>
+        <member name="F:RGN.Modules.Inventory.InventoryItemData.properties">
+            <summary>
+            List of inventory item custom json. It is used to store
+            game specific json in json format.
+            For example: you can attach some json like
+            "additiona_description", "in_app_products", "display_animation" for this
+            inventory item
+            </summary>
+        </member>
+        <member name="M:RGN.Modules.Inventory.InventoryItemData.GetVirtualItem">
+            <summary>
+            The virtual items data.
+            This is not null when the 
+            <see cref="M:RGN.Modules.Inventory.InventoryModule.GetWithVirtualItemsDataForCurrentAppAsync(System.String,System.Int32)"/> or
+            <see cref="M:RGN.Modules.Inventory.InventoryModule.GetWithVirtualItemsDataByAppIdsAsync(System.Collections.Generic.List{System.String},System.String,System.Int32)"/>
+            methods are used.
+            In all other cases this method will return null
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:RGN.Modules.Inventory.AddVirtualItemToUserInventoryRequestData">
+            <summary>
+            Request to add new item in user inventory
+            </summary>
+        </member>
+        <member name="T:RGN.Modules.Inventory.AddToInventoryResponseData">
+            <summary>
+            Response that return the new quantity of the item recently added
+            </summary>
+        </member>
+    </members>
+</doc>
