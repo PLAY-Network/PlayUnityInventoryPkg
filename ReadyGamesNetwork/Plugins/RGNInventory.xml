@@ -44,16 +44,7 @@
             <param name="ownedItemId">The ownedItemId of the virtual item to search in inventory for</param>
             <returns></returns>
         </member>
-        <member name="M:RGN.Modules.Inventory.InventoryModule.UpgradeAsync(System.String,System.Int32,System.String)">
-            <summary>
-            Upgrades user owned virtual item to a new level
-            </summary>
-            <param name="ownedItemId">The ownedItemId of the owned inventory item</param>
-            <param name="newUpgradeLevel">New upgrade level for the owned virtual item</param>
-            <param name="upgradeId">Optional parameter for upgrade ownedItemId. One owned item can have multiple upgrades
-            with different ids. By default the upgradeId is 'default'</param>
-            <returns></returns>
-        </member>
+        <!-- Badly formed XML comment ignored for member "M:RGN.Modules.Inventory.InventoryModule.UpgradeAsync(System.String,System.Int32,System.String,System.Collections.Generic.List{RGN.Modules.Currency.Currency})" -->
         <member name="M:RGN.Modules.Inventory.InventoryModule.GetByIdAsync(System.String)">
             <summary>
             Get single owned virtual item inventory data by ownedItemId
