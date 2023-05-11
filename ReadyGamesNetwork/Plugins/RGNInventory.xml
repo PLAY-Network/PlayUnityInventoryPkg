@@ -132,6 +132,15 @@
             in user inventory.
             </summary>
         </member>
+        <member name="F:RGN.Modules.Inventory.InventoryItemData.status">
+            <summary>
+            Current status of inventory item
+            Always confirmed for nonNFT items
+            NFT items after purchase have pending status
+            After blockchain confirmation the item
+            will have confirmed status
+            </summary>
+        </member>
         <member name="F:RGN.Modules.Inventory.InventoryItemData.itemUpgrades">
             <summary>
             The upgrades for non stackable virtual item
