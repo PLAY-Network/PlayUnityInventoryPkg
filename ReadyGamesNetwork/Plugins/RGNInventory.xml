@@ -4,6 +4,12 @@
         <name>RGNInventory</name>
     </assembly>
     <members>
+        <member name="T:RGN.Modules.Inventory.InventoryModule">
+            <summary>
+            Represents the inventory module in the RGN system. This class manages inventory data.
+            Virtual items are referenced by the inventory data.
+            </summary>
+        </member>
         <member name="F:RGN.Modules.Inventory.InventoryModule.ITEM_ADDED_EVENT_TOPIC">
             <summary>
             This topic event is fired for signed in user when a new inventory item
@@ -21,6 +27,99 @@
             You can use MessagingModule to subscribe on this event.
             Please use the <see cref="M:RGN.Modules.Inventory.InventoryModule.ParseInventoryItemsData(System.String)"/> method to parse the message payload
             </summary>
+        </member>
+        <member name="M:RGN.Modules.Inventory.InventoryModule.SetRGNCore(RGN.IRGNRolesCore)">
+            <summary>
+            Sets the Ready Games Network (RGN) core reference.
+            </summary>
+            <param name="rgnCore">The RGN core to be set.</param>
+        </member>
+        <member name="M:RGN.Modules.Inventory.InventoryModule.Init">
+            <summary>
+            Initializes the InventoryModule.
+            This method is currently empty and can be filled with initial setup logic if needed in the future.
+            </summary>
+        </member>
+        <member name="M:RGN.Modules.Inventory.InventoryModule.Dispose">
+            <summary>
+            Releases all resources used by the InventoryModule.
+            This method is currently empty and can be filled with cleanup logic if needed in the future.
+            </summary>
+        </member>
+        <member name="M:RGN.Modules.Inventory.InventoryModule.AddToInventoryAsync(System.String,System.Int32,RGN.Modules.VirtualItems.Properties)">
+            <summary>
+            Asynchronously adds a specified quantity of a virtual item to the current logged in user's inventory.
+            </summary>
+            <param name="virtualItemId">The unique identifier of the virtual item to be added to the inventory.</param>
+            <param name="quantity">The quantity of the virtual item to be added. The default value is 1.</param>
+            <param name="properties">Optional additional properties associated with the item. The default is null.</param>
+            <returns>
+            A Task that represents the asynchronous operation.
+            The task result contains an <see cref="T:RGN.Modules.Inventory.AddToInventoryResponseData"/> object which holds the response data of the operation.
+            </returns>
+            <exception cref="T:System.InvalidOperationException">Thrown when the user is not logged in.</exception>
+        </member>
+        <member name="M:RGN.Modules.Inventory.InventoryModule.AddToInventoryAsync(System.String,System.String,System.Int32,RGN.Modules.VirtualItems.Properties)">
+            <summary>
+            Asynchronously adds a specified quantity of a virtual item to the inventory for a specified user.
+            </summary>
+            <param name="userId">The unique identifier of the user whose inventory will be updated.</param>
+            <param name="virtualItemId">The unique identifier of the virtual item to be added to the user's inventory.</param>
+            <param name="quantity">The quantity of the virtual item to be added. The default value is 1.</param>
+            <param name="properties">Optional additional properties associated with the item. The default is null.</param>
+            <returns>
+            A Task that represents the asynchronous operation.
+            The task result contains an <see cref="T:RGN.Modules.Inventory.AddToInventoryResponseData"/> object which holds the response data of the operation.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when the ownedItemId is null or empty.</exception>
+        </member>
+        <member name="M:RGN.Modules.Inventory.InventoryModule.AddToInventoryAsync(System.String,RGN.Modules.Inventory.InventoryItemData)">
+            <summary>
+            Asynchronously adds a specified inventory item to the inventory for a specified user.
+            </summary>
+            <param name="userId">The unique identifier of the user whose inventory will be updated.</param>
+            <param name="inventoryData">The data of the inventory item to be added to the user's inventory. Includes item's unique identifier, quantity and optional additional properties.</param>
+            <returns>
+            A Task that represents the asynchronous operation.
+            The task result contains an <see cref="T:RGN.Modules.Inventory.AddToInventoryResponseData"/> object which holds the response data of the operation.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when the userId or inventoryData.ownedItemId is null or empty.</exception>
+        </member>
+        <member name="M:RGN.Modules.Inventory.InventoryModule.RemoveByVirtualItemIdAsync(System.String,System.String,System.Int32)">
+            <summary>
+            Asynchronously removes a specified quantity of a virtual item from a user's inventory by its unique identifier.
+            </summary>
+            <param name="userId">The unique identifier of the user whose inventory to modify.</param>
+            <param name="virtualItemId">The unique identifier of the virtual item to remove.</param>
+            <param name="quantity">The quantity of the virtual item to remove. Must be a positive number.</param>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when <paramref name="virtualItemId"/> is null or empty.
+            </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            Thrown when <paramref name="quantity"/> is less than or equal to zero.
+            </exception>
+            <returns>
+            A task that represents the asynchronous operation.
+            The task result contains a <see cref="T:RGN.Modules.Inventory.RemoveByVirtualItemIdResponseData"/> object which holds the server's response data.
+            </returns>
+        </member>
+        <member name="M:RGN.Modules.Inventory.InventoryModule.RemoveByInventoryItemIdAsync(System.String,System.String,System.Int32)">
+            <summary>
+            Asynchronously removes a specified quantity of a virtual item from a user's inventory by its owned item identifier.
+            </summary>
+            <param name="userId">The unique identifier of the user whose inventory to modify.</param>
+            <param name="ownedItemId">The unique identifier of the owned item to remove.</param>
+            <param name="quantity">The quantity of the owned item to remove. Must be a positive number. Default is 1.</param>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when <paramref name="ownedItemId"/> is null or empty.
+            </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            Thrown when <paramref name="quantity"/> is less than or equal to zero.
+            </exception>
+            <returns>
+            A task that represents the asynchronous operation.
+            The task result contains a <see cref="T:RGN.Modules.Inventory.RemoveByOwnedIdResponseData"/> object which holds the server's response data.
+            </returns>
         </member>
         <member name="M:RGN.Modules.Inventory.InventoryModule.GetPropertiesAsync(System.String)">
             <summary>
@@ -95,9 +194,74 @@
             <param name="limit"></param>
             <returns></returns>
         </member>
+        <member name="M:RGN.Modules.Inventory.InventoryModule.ParseInventoryItemData(System.String)">
+            <summary>
+            Parses a JSON string representation of an <see cref="T:RGN.Modules.Inventory.InventoryItemData"/> object.
+            </summary>
+            <param name="json">The JSON string representation of an <see cref="T:RGN.Modules.Inventory.InventoryItemData"/> object.</param>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when <paramref name="json"/> is null or empty.
+            </exception>
+            <returns>
+            An <see cref="T:RGN.Modules.Inventory.InventoryItemData"/> object represented by the JSON string. 
+            Returns null if the JSON string does not represent a valid <see cref="T:RGN.Modules.Inventory.InventoryItemData"/> object.
+            </returns>
+        </member>
+        <member name="M:RGN.Modules.Inventory.InventoryModule.ParseInventoryItemsData(System.String)">
+            <summary>
+            Parses a JSON string representation of a list of <see cref="T:RGN.Modules.Inventory.InventoryItemData"/> objects.
+            </summary>
+            <param name="json">The JSON string representation of a list of <see cref="T:RGN.Modules.Inventory.InventoryItemData"/> objects.</param>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when <paramref name="json"/> is null or empty.
+            </exception>
+            <returns>
+            A list of <see cref="T:RGN.Modules.Inventory.InventoryItemData"/> objects represented by the JSON string.
+            Returns null if the JSON string does not represent a valid list of <see cref="T:RGN.Modules.Inventory.InventoryItemData"/> objects.
+            </returns>
+        </member>
+        <member name="M:RGN.Modules.Inventory.InventoryModule.GetByTagsAsync(System.Collections.Generic.List{System.String},System.String)">
+            <summary>
+            Asynchronously retrieves a list of <see cref="T:RGN.Modules.Inventory.InventoryItemData"/> objects from the Ready Games Network (RGN)
+            for current logged in user
+            </summary>
+            <param name="tags">A list of tags used to filter the inventory items.</param>
+            <param name="appId">An optional parameter representing the application identifier for further filtering of the inventory items.
+            The default is an empty string.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when the provided tags list is null or empty.</exception>
+            <returns>A Task representing the asynchronous operation. The Result property of the Task returns a list of
+            <see cref="T:RGN.Modules.Inventory.InventoryItemData"/> objects representing the inventory items that match the specified tags and appId.</returns>
+        </member>
+        <member name="M:RGN.Modules.Inventory.InventoryModule.GetTagsAsync(System.String)">
+            <summary>
+            Asynchronously retrieves the tags of an owned item in the inventory by its identifier for current logged in user
+            </summary>
+            <param name="ownedItemId">The unique identifier of the owned item for which to retrieve tags.</param>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when <paramref name="ownedItemId"/> is null or empty.
+            </exception>
+            <returns>
+            A task that represents the asynchronous operation.
+            The task result contains a list of tags associated with the owned item.
+            </returns>
+        </member>
+        <member name="M:RGN.Modules.Inventory.InventoryModule.SetTagsAsync(System.String,System.Collections.Generic.List{System.String},System.String)">
+            <summary>
+            Asynchronously sets the tags for an owned item in the inventory by its identifier for current logged in user
+            </summary>
+            <param name="ownedItemId">The unique identifier of the owned item for which to set tags.</param>
+            <param name="tags">A list of tags to be associated with the owned item.</param>
+            <param name="appId">The unique identifier of the app. Default value is an empty string.</param>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when <paramref name="ownedItemId"/> is null or empty, or when <paramref name="tags"/> is null.
+            </exception>
+            <returns>
+            A task that represents the asynchronous operation.
+            </returns>
+        </member>
         <member name="T:RGN.Modules.Inventory.InventoryItemData">
             <summary>
-            Base inventory structure
+            Represents the data structure of an inventory item within the Ready Games Network (RGN).
             </summary>
         </member>
         <member name="F:RGN.Modules.Inventory.InventoryItemData.id">
@@ -161,14 +325,47 @@
         </member>
         <member name="M:RGN.Modules.Inventory.InventoryItemData.GetVirtualItem">
             <summary>
-            The virtual items data.
-            This is not null when the 
-            <see cref="M:RGN.Modules.Inventory.InventoryModule.GetWithVirtualItemsDataForCurrentAppAsync(System.String,System.Int32)"/> or
-            <see cref="M:RGN.Modules.Inventory.InventoryModule.GetWithVirtualItemsDataByAppIdsAsync(System.Collections.Generic.List{System.String},System.String,System.Int32)"/>
-            methods are used.
-            In all other cases this method will return null
+            Retrieves the associated virtual item data if available.
             </summary>
-            <returns></returns>
+            <returns>The virtual item associated with this inventory item.
+            This will be null unless the inventory item was retrieved
+            using <see cref="M:RGN.Modules.Inventory.InventoryModule.GetWithVirtualItemsDataForCurrentAppAsync(System.String,System.Int32)"/> or
+            <see cref="M:RGN.Modules.Inventory.InventoryModule.GetWithVirtualItemsDataByAppIdsAsync(System.Collections.Generic.List{System.String},System.String,System.Int32)"/> methods.
+            </returns>
+        </member>
+        <member name="M:RGN.Modules.Inventory.InventoryItemData.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:RGN.Modules.Inventory.InventoryItemData.#ctor(System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            Constructs an instance of InventoryItemData using the specified virtual item id and application ids.
+            </summary>
+            <param name="virtualItemId">The unique identifier of the virtual item to be added.</param>
+            <param name="appIds">The list of application identifiers where this item is used.</param>
+        </member>
+        <member name="M:RGN.Modules.Inventory.InventoryItemData.#ctor(System.String,System.Collections.Generic.List{System.String},System.Int32,RGN.Modules.VirtualItems.Properties)">
+            <summary>
+            Constructs an instance of InventoryItemData using the specified virtual item id, application ids, quantity, and properties.
+            </summary>
+            <param name="virtualItemId">The unique identifier of the virtual item to be added.</param>
+            <param name="appIds">The list of application identifiers where this item is used.</param>
+            <param name="quantity">The quantity of the virtual item to be added. The default value is 1.</param>
+            <param name="properties">The list of inventory item custom properties in json format. It is used to store game specific properties.</param>
+        </member>
+        <member name="M:RGN.Modules.Inventory.InventoryItemData.#ctor(RGN.Modules.Inventory.InventoryItemData,RGN.Modules.VirtualItems.VirtualItem)">
+            <summary>
+            Constructs an instance of InventoryItemData using an existing InventoryItemData and VirtualItem.
+            </summary>
+            <param name="inventoryItem">An instance of InventoryItemData to be cloned.</param>
+            <param name="virtualItem">The virtual item associated with this inventory item.</param>
+        </member>
+        <member name="M:RGN.Modules.Inventory.InventoryItemData.ToString">
+            <summary>
+            Converts the value of this instance to its equivalent string representation.
+            </summary>
+            <returns>A string that represents the current object.</returns>
         </member>
         <member name="T:RGN.Modules.Inventory.AddVirtualItemToUserInventoryRequestData">
             <summary>
@@ -179,6 +376,12 @@
             <summary>
             Response that return the new quantity of the item recently added
             </summary>
+        </member>
+        <member name="M:RGN.Modules.Inventory.VirtualItemUpgrade.ToString">
+            <summary>
+            Converts the value of this instance to its equivalent string representation.
+            </summary>
+            <returns>A string that represents the current object.</returns>
         </member>
     </members>
 </doc>
