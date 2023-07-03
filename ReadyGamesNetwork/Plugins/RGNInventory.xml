@@ -257,6 +257,7 @@
             </exception>
             <returns>
             A task that represents the asynchronous operation.
+            The task result contains a list of tags associated with the owned item.
             </returns>
         </member>
         <member name="T:RGN.Modules.Inventory.InventoryItemData">
@@ -303,6 +304,18 @@
             NFT items after purchase have pending status
             After blockchain confirmation the item
             will have confirmed status
+            </summary>
+        </member>
+        <member name="F:RGN.Modules.Inventory.InventoryItemData.createdAt">
+            <summary>
+            Date and time when the inventory item was created
+            This field is automatically populated by the backend
+            </summary>
+        </member>
+        <member name="F:RGN.Modules.Inventory.InventoryItemData.updatedAt">
+            <summary>
+            Date and time when the inventory item data was last time updated
+            This field is automatically populated by the backend
             </summary>
         </member>
         <member name="F:RGN.Modules.Inventory.InventoryItemData.itemUpgrades">
