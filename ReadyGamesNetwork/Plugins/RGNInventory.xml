@@ -28,24 +28,6 @@
             Please use the <see cref="M:RGN.Modules.Inventory.InventoryModule.ParseInventoryItemsData(System.String)"/> method to parse the message payload
             </summary>
         </member>
-        <member name="M:RGN.Modules.Inventory.InventoryModule.SetRGNCore(RGN.IRGNRolesCore)">
-            <summary>
-            Sets the Ready Games Network (RGN) core reference.
-            </summary>
-            <param name="rgnCore">The RGN core to be set.</param>
-        </member>
-        <member name="M:RGN.Modules.Inventory.InventoryModule.Init">
-            <summary>
-            Initializes the InventoryModule.
-            This method is currently empty and can be filled with initial setup logic if needed in the future.
-            </summary>
-        </member>
-        <member name="M:RGN.Modules.Inventory.InventoryModule.Dispose">
-            <summary>
-            Releases all resources used by the InventoryModule.
-            This method is currently empty and can be filled with cleanup logic if needed in the future.
-            </summary>
-        </member>
         <member name="M:RGN.Modules.Inventory.InventoryModule.AddToInventoryAsync(System.String,System.Int32,RGN.Modules.VirtualItems.Properties)">
             <summary>
             Asynchronously adds a specified quantity of a virtual item to the current logged in user's inventory.
