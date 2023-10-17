@@ -1,2 +1,2 @@
 # RGN Inventory
-Package version: 0.8.0-dev.396
+Package version: 0.8.0-dev.397
