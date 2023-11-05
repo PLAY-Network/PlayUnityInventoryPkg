@@ -125,7 +125,7 @@
             <param name="ownedItemId">The ownedItemId of the virtual item to search in inventory for</param>
             <returns></returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:RGN.Modules.Inventory.InventoryModule.UpgradeAsync(System.String,System.Int32,System.String,System.Collections.Generic.List{RGN.Modules.Currency.Currency})" -->
+        <!-- Badly formed XML comment ignored for member "M:RGN.Modules.Inventory.InventoryModule.UpgradeAsync(System.String,System.Int32,System.Collections.Generic.List{RGN.Modules.Currency.Currency},System.String)" -->
         <member name="M:RGN.Modules.Inventory.InventoryModule.GetByIdAsync(System.String)">
             <summary>
             Get single owned virtual item inventory data by ownedItemId
