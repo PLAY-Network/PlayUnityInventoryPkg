@@ -177,11 +177,13 @@
             <param name="cancellationToken">A token to cancel the operation.</param>
             <returns></returns>
         </member>
-        <member name="M:RGN.Modules.Inventory.InventoryModule.GetByAppIdsAsync(System.Collections.Generic.List{System.String},System.Threading.CancellationToken)">
+        <member name="M:RGN.Modules.Inventory.InventoryModule.GetByAppIdsAsync(System.Collections.Generic.List{System.String},System.String,System.Int32,System.Threading.CancellationToken)">
             <summary>
             Get multiple owned virtual items inventory data by app ids
             </summary>
             <param name="appIds"></param>
+            <param name="startAfter"></param>
+            <param name="limit"></param>
             <param name="cancellationToken">A token to cancel the operation.</param>
             <returns></returns>
         </member>
