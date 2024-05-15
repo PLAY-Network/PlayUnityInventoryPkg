@@ -28,20 +28,21 @@
             Please use the <see cref="M:RGN.Modules.Inventory.InventoryModule.ParseInventoryItemsData(System.String)"/> method to parse the message payload
             </summary>
         </member>
-        <member name="M:RGN.Modules.Inventory.InventoryModule.AddToInventoryAsync(System.String,System.Int32,RGN.Modules.VirtualItems.Properties)">
+        <member name="M:RGN.Modules.Inventory.InventoryModule.AddToInventoryAsync(System.String,System.Int32,RGN.Modules.VirtualItems.Properties,System.Threading.CancellationToken)">
             <summary>
             Asynchronously adds a specified quantity of a virtual item to the current logged in user's inventory.
             </summary>
             <param name="virtualItemId">The unique identifier of the virtual item to be added to the inventory.</param>
             <param name="quantity">The quantity of the virtual item to be added. The default value is 1.</param>
             <param name="properties">Optional additional properties associated with the item. The default is null.</param>
+            <param name="cancellationToken">A token to cancel the operation.</param>
             <returns>
             A Task that represents the asynchronous operation.
             The task result contains an <see cref="T:RGN.Modules.Inventory.AddToInventoryResponseData"/> object which holds the response data of the operation.
             </returns>
             <exception cref="T:System.InvalidOperationException">Thrown when the user is not logged in.</exception>
         </member>
-        <member name="M:RGN.Modules.Inventory.InventoryModule.AddToInventoryAsync(System.String,System.String,System.Int32,RGN.Modules.VirtualItems.Properties)">
+        <member name="M:RGN.Modules.Inventory.InventoryModule.AddToInventoryAsync(System.String,System.String,System.Int32,RGN.Modules.VirtualItems.Properties,System.Threading.CancellationToken)">
             <summary>
             Asynchronously adds a specified quantity of a virtual item to the inventory for a specified user.
             </summary>
@@ -49,31 +50,34 @@
             <param name="virtualItemId">The unique identifier of the virtual item to be added to the user's inventory.</param>
             <param name="quantity">The quantity of the virtual item to be added. The default value is 1.</param>
             <param name="properties">Optional additional properties associated with the item. The default is null.</param>
+            <param name="cancellationToken">A token to cancel the operation.</param>
             <returns>
             A Task that represents the asynchronous operation.
             The task result contains an <see cref="T:RGN.Modules.Inventory.AddToInventoryResponseData"/> object which holds the response data of the operation.
             </returns>
             <exception cref="T:System.ArgumentNullException">Thrown when the ownedItemId is null or empty.</exception>
         </member>
-        <member name="M:RGN.Modules.Inventory.InventoryModule.AddToInventoryAsync(System.String,RGN.Modules.Inventory.InventoryItemData)">
+        <member name="M:RGN.Modules.Inventory.InventoryModule.AddToInventoryAsync(System.String,RGN.Modules.Inventory.InventoryItemData,System.Threading.CancellationToken)">
             <summary>
             Asynchronously adds a specified inventory item to the inventory for a specified user.
             </summary>
             <param name="userId">The unique identifier of the user whose inventory will be updated.</param>
             <param name="inventoryData">The data of the inventory item to be added to the user's inventory. Includes item's unique identifier, quantity and optional additional properties.</param>
+            <param name="cancellationToken">A token to cancel the operation.</param>
             <returns>
             A Task that represents the asynchronous operation.
             The task result contains an <see cref="T:RGN.Modules.Inventory.AddToInventoryResponseData"/> object which holds the response data of the operation.
             </returns>
             <exception cref="T:System.ArgumentNullException">Thrown when the userId or inventoryData.ownedItemId is null or empty.</exception>
         </member>
-        <member name="M:RGN.Modules.Inventory.InventoryModule.RemoveByVirtualItemIdAsync(System.String,System.String,System.Int32)">
+        <member name="M:RGN.Modules.Inventory.InventoryModule.RemoveByVirtualItemIdAsync(System.String,System.String,System.Int32,System.Threading.CancellationToken)">
             <summary>
             Asynchronously removes a specified quantity of a virtual item from a user's inventory by its unique identifier.
             </summary>
             <param name="userId">The unique identifier of the user whose inventory to modify.</param>
             <param name="virtualItemId">The unique identifier of the virtual item to remove.</param>
             <param name="quantity">The quantity of the virtual item to remove. Must be a positive number.</param>
+            <param name="cancellationToken">A token to cancel the operation.</param>
             <exception cref="T:System.ArgumentNullException">
             Thrown when <paramref name="virtualItemId"/> is null or empty.
             </exception>
@@ -85,13 +89,14 @@
             The task result contains a <see cref="T:RGN.Modules.Inventory.RemoveByVirtualItemIdResponseData"/> object which holds the server's response data.
             </returns>
         </member>
-        <member name="M:RGN.Modules.Inventory.InventoryModule.RemoveByInventoryItemIdAsync(System.String,System.String,System.Int32)">
+        <member name="M:RGN.Modules.Inventory.InventoryModule.RemoveByInventoryItemIdAsync(System.String,System.String,System.Int32,System.Threading.CancellationToken)">
             <summary>
             Asynchronously removes a specified quantity of a virtual item from a user's inventory by its owned item identifier.
             </summary>
             <param name="userId">The unique identifier of the user whose inventory to modify.</param>
             <param name="ownedItemId">The unique identifier of the owned item to remove.</param>
             <param name="quantity">The quantity of the owned item to remove. Must be a positive number. Default is 1.</param>
+            <param name="cancellationToken">A token to cancel the operation.</param>
             <exception cref="T:System.ArgumentNullException">
             Thrown when <paramref name="ownedItemId"/> is null or empty.
             </exception>
@@ -103,77 +108,100 @@
             The task result contains a <see cref="T:RGN.Modules.Inventory.RemoveByOwnedIdResponseData"/> object which holds the server's response data.
             </returns>
         </member>
-        <member name="M:RGN.Modules.Inventory.InventoryModule.GetPropertiesAsync(System.String)">
+        <member name="M:RGN.Modules.Inventory.InventoryModule.GetPropertiesAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Returns json string or throws an exception if there are no json for virtual item
             </summary>
             <param name="ownedItemId"></param>
+            <param name="cancellationToken">A token to cancel the operation.</param>
             <returns>Returns json as string</returns>
         </member>
-        <member name="M:RGN.Modules.Inventory.InventoryModule.SetPropertiesAsync(System.String,System.String)">
+        <member name="M:RGN.Modules.Inventory.InventoryModule.SetPropertiesAsync(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Set json on a given ownedItemId. 
             </summary>
             <param name="ownedItemId"></param>
             <param name="json"></param>
+            <param name="cancellationToken">A token to cancel the operation.</param>
             <returns>Returns json as string</returns>
         </member>
-        <member name="M:RGN.Modules.Inventory.InventoryModule.GetUpgradesAsync(System.String)">
+        <member name="M:RGN.Modules.Inventory.InventoryModule.GetUpgradesAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Get user owned item upgrades, returns all upgrades for all owned items for virtual item ownedItemId
             </summary>
             <param name="ownedItemId">The ownedItemId of the virtual item to search in inventory for</param>
+            <param name="cancellationToken">A token to cancel the operation.</param>
             <returns></returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:RGN.Modules.Inventory.InventoryModule.UpgradeAsync(System.String,System.Int32,System.Collections.Generic.List{RGN.Modules.Currency.Currency},System.String)" -->
-        <member name="M:RGN.Modules.Inventory.InventoryModule.GetByIdAsync(System.String)">
+        <member name="M:RGN.Modules.Inventory.InventoryModule.UpgradeAsync(System.String,System.Int32,System.Collections.Generic.List{RGN.Modules.Currency.Currency},System.String,System.Threading.CancellationToken)">
+            <summary>
+            Upgrades user owned virtual item to a new level
+            </summary>
+            <param name="ownedItemId">The ownedItemId of the owned inventory item</param>
+            <param name="newUpgradeLevel">New upgrade level for the owned virtual item</param>
+            <param name="upgradePrice">Optional parameter for set price of upgrade.</param>
+            <param name="upgradeId">Optional parameter for upgrade ownedItemId. One owned item can have multiple upgrades
+            with different ids. By default the upgradeId is 'default'</param>
+            <param name="cancellationToken">A token to cancel the operation.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RGN.Modules.Inventory.InventoryModule.GetByIdAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Get single owned virtual item inventory data by ownedItemId
             </summary>
             <param name="ownedItemId">The id of the owned item in users inventory</param>
+            <param name="cancellationToken">A token to cancel the operation.</param>
             <returns></returns>
         </member>
-        <member name="M:RGN.Modules.Inventory.InventoryModule.GetByIdsAsync(System.Collections.Generic.List{System.String})">
+        <member name="M:RGN.Modules.Inventory.InventoryModule.GetByIdsAsync(System.Collections.Generic.List{System.String},System.Threading.CancellationToken)">
             <summary>
             Get owned virtual items inventory data by ownedItemIds
             Returns empty if non of the items ids exist for current user
             </summary>
             <param name="ownedItemIds">The ids collection of the owned items in users inventory</param>
+            <param name="cancellationToken">A token to cancel the operation.</param>
             <returns></returns>
         </member>
-        <member name="M:RGN.Modules.Inventory.InventoryModule.GetByVirtualItemIdsAsync(System.Collections.Generic.List{System.String})">
+        <member name="M:RGN.Modules.Inventory.InventoryModule.GetByVirtualItemIdsAsync(System.Collections.Generic.List{System.String},System.Threading.CancellationToken)">
             <summary>
             Get multiple owned virtual items inventory data by virtual items ids
             </summary>
             <param name="virtualItemIds"></param>
+            <param name="cancellationToken">A token to cancel the operation.</param>
             <returns></returns>
         </member>
-        <member name="M:RGN.Modules.Inventory.InventoryModule.GetAllForCurrentAppAsync">
+        <member name="M:RGN.Modules.Inventory.InventoryModule.GetAllForCurrentAppAsync(System.Threading.CancellationToken)">
             <summary>
             Get multiple owned virtual items inventory data for current app
             </summary>
+            <param name="cancellationToken">A token to cancel the operation.</param>
             <returns></returns>
         </member>
-        <member name="M:RGN.Modules.Inventory.InventoryModule.GetByAppIdsAsync(System.Collections.Generic.List{System.String})">
+        <member name="M:RGN.Modules.Inventory.InventoryModule.GetByAppIdsAsync(System.Collections.Generic.List{System.String},System.Threading.CancellationToken)">
             <summary>
             Get multiple owned virtual items inventory data by app ids
             </summary>
             <param name="appIds"></param>
+            <param name="cancellationToken">A token to cancel the operation.</param>
             <returns></returns>
         </member>
-        <member name="M:RGN.Modules.Inventory.InventoryModule.GetWithVirtualItemsDataForCurrentAppAsync(System.String,System.Int32)">
+        <member name="M:RGN.Modules.Inventory.InventoryModule.GetWithVirtualItemsDataForCurrentAppAsync(System.String,System.Int32,System.Threading.CancellationToken)">
             <summary>
             Get multiple owned virtual items inventory data for current app with the Virtual Item data included
             </summary>
+            <param name="startAfter">The ownedItemId to start after</param>
+            <param name="limit">The maximum number of items to return</param>
+            <param name="cancellationToken">A token to cancel the operation.</param>
             <returns></returns>
         </member>
-        <member name="M:RGN.Modules.Inventory.InventoryModule.GetWithVirtualItemsDataByAppIdsAsync(System.Collections.Generic.List{System.String},System.String,System.Int32)">
+        <member name="M:RGN.Modules.Inventory.InventoryModule.GetWithVirtualItemsDataByAppIdsAsync(System.Collections.Generic.List{System.String},System.String,System.Int32,System.Threading.CancellationToken)">
             <summary>
             Get multiple owned virtual items inventory data by app ids with the Virtual Item data included
             </summary>
             <param name="appIds"></param>
             <param name="startAfter"></param>
             <param name="limit"></param>
+            <param name="cancellationToken">A token to cancel the operation.</param>
             <returns></returns>
         </member>
         <member name="M:RGN.Modules.Inventory.InventoryModule.ParseInventoryItemData(System.String)">
@@ -202,7 +230,7 @@
             Returns null if the JSON string does not represent a valid list of <see cref="T:RGN.Modules.Inventory.InventoryItemData"/> objects.
             </returns>
         </member>
-        <member name="M:RGN.Modules.Inventory.InventoryModule.GetByTagsAsync(System.Collections.Generic.List{System.String},System.String)">
+        <member name="M:RGN.Modules.Inventory.InventoryModule.GetByTagsAsync(System.Collections.Generic.List{System.String},System.String,System.Threading.CancellationToken)">
             <summary>
             Asynchronously retrieves a list of <see cref="T:RGN.Modules.Inventory.InventoryItemData"/> objects from the Ready Games Network (RGN)
             for current logged in user
@@ -210,15 +238,17 @@
             <param name="tags">A list of tags used to filter the inventory items.</param>
             <param name="appId">An optional parameter representing the application identifier for further filtering of the inventory items.
             The default is an empty string.</param>
+            <param name="cancellationToken">A token to cancel the operation.</param>
             <exception cref="T:System.ArgumentNullException">Thrown when the provided tags list is null or empty.</exception>
             <returns>A Task representing the asynchronous operation. The Result property of the Task returns a list of
             <see cref="T:RGN.Modules.Inventory.InventoryItemData"/> objects representing the inventory items that match the specified tags and appId.</returns>
         </member>
-        <member name="M:RGN.Modules.Inventory.InventoryModule.GetTagsAsync(System.String)">
+        <member name="M:RGN.Modules.Inventory.InventoryModule.GetTagsAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Asynchronously retrieves the tags of an owned item in the inventory by its identifier for current logged in user
             </summary>
             <param name="ownedItemId">The unique identifier of the owned item for which to retrieve tags.</param>
+            <param name="cancellationToken">A token to cancel the operation.</param>
             <exception cref="T:System.ArgumentNullException">
             Thrown when <paramref name="ownedItemId"/> is null or empty.
             </exception>
@@ -227,13 +257,14 @@
             The task result contains a list of tags associated with the owned item.
             </returns>
         </member>
-        <member name="M:RGN.Modules.Inventory.InventoryModule.SetTagsAsync(System.String,System.Collections.Generic.List{System.String},System.String)">
+        <member name="M:RGN.Modules.Inventory.InventoryModule.SetTagsAsync(System.String,System.Collections.Generic.List{System.String},System.String,System.Threading.CancellationToken)">
             <summary>
             Asynchronously sets the tags for an owned item in the inventory by its identifier for current logged in user
             </summary>
             <param name="ownedItemId">The unique identifier of the owned item for which to set tags.</param>
             <param name="tags">A list of tags to be associated with the owned item.</param>
             <param name="appId">The unique identifier of the app. Default value is an empty string.</param>
+            <param name="cancellationToken">A token to cancel the operation.</param>
             <exception cref="T:System.ArgumentNullException">
             Thrown when <paramref name="ownedItemId"/> is null or empty, or when <paramref name="tags"/> is null.
             </exception>
@@ -328,8 +359,8 @@
             </summary>
             <returns>The virtual item associated with this inventory item.
             This will be null unless the inventory item was retrieved
-            using <see cref="M:RGN.Modules.Inventory.InventoryModule.GetWithVirtualItemsDataForCurrentAppAsync(System.String,System.Int32)"/> or
-            <see cref="M:RGN.Modules.Inventory.InventoryModule.GetWithVirtualItemsDataByAppIdsAsync(System.Collections.Generic.List{System.String},System.String,System.Int32)"/> methods.
+            using <see cref="!:InventoryModule.GetWithVirtualItemsDataForCurrentAppAsync(string, int)"/> or
+            <see cref="!:InventoryModule.GetWithVirtualItemsDataByAppIdsAsync(List&lt;string&gt;, string, int)"/> methods.
             </returns>
         </member>
         <member name="M:RGN.Modules.Inventory.InventoryItemData.#ctor">
