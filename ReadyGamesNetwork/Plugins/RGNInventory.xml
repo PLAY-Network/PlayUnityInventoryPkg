@@ -232,14 +232,12 @@
             Returns null if the JSON string does not represent a valid list of <see cref="T:RGN.Modules.Inventory.InventoryItemData"/> objects.
             </returns>
         </member>
-        <member name="M:RGN.Modules.Inventory.InventoryModule.GetByTagsAsync(System.Collections.Generic.List{System.String},System.String,System.Threading.CancellationToken)">
+        <member name="M:RGN.Modules.Inventory.InventoryModule.GetByTagsAsync(System.Collections.Generic.List{System.String},System.Threading.CancellationToken)">
             <summary>
             Asynchronously retrieves a list of <see cref="T:RGN.Modules.Inventory.InventoryItemData"/> objects from the Ready Games Network (RGN)
             for current logged in user
             </summary>
             <param name="tags">A list of tags used to filter the inventory items.</param>
-            <param name="appId">An optional parameter representing the application identifier for further filtering of the inventory items.
-            The default is an empty string.</param>
             <param name="cancellationToken">A token to cancel the operation.</param>
             <exception cref="T:System.ArgumentNullException">Thrown when the provided tags list is null or empty.</exception>
             <returns>A Task representing the asynchronous operation. The Result property of the Task returns a list of
@@ -259,13 +257,12 @@
             The task result contains a list of tags associated with the owned item.
             </returns>
         </member>
-        <member name="M:RGN.Modules.Inventory.InventoryModule.SetTagsAsync(System.String,System.Collections.Generic.List{System.String},System.String,System.Threading.CancellationToken)">
+        <member name="M:RGN.Modules.Inventory.InventoryModule.SetTagsAsync(System.String,System.Collections.Generic.List{System.String},System.Threading.CancellationToken)">
             <summary>
             Asynchronously sets the tags for an owned item in the inventory by its identifier for current logged in user
             </summary>
             <param name="ownedItemId">The unique identifier of the owned item for which to set tags.</param>
             <param name="tags">A list of tags to be associated with the owned item.</param>
-            <param name="appId">The unique identifier of the app. Default value is an empty string.</param>
             <param name="cancellationToken">A token to cancel the operation.</param>
             <exception cref="T:System.ArgumentNullException">
             Thrown when <paramref name="ownedItemId"/> is null or empty, or when <paramref name="tags"/> is null.
