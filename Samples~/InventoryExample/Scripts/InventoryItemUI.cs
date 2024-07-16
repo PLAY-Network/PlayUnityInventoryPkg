@@ -10,7 +10,8 @@ namespace RGN.Samples
 {
     internal sealed class InventoryItemUI : MonoBehaviour, System.IDisposable
     {
-        public string Id { get => _inventoryItemData.id; }
+        public string Id => _inventoryItemData.id;
+        public long UpdatedAt => _inventoryItemData.updatedAt;
 
         [SerializeField] private RectTransform _rectTransform;
         [SerializeField] private TextMeshProUGUI _inventoryItemIdText;

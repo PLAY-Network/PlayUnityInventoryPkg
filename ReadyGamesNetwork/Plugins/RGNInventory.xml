@@ -177,31 +177,31 @@
             <param name="cancellationToken">A token to cancel the operation.</param>
             <returns></returns>
         </member>
-        <member name="M:RGN.Modules.Inventory.InventoryModule.GetByAppIdsAsync(System.Collections.Generic.List{System.String},System.String,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:RGN.Modules.Inventory.InventoryModule.GetByAppIdsAsync(System.Collections.Generic.List{System.String},System.Int64,System.Int32,System.Threading.CancellationToken)">
             <summary>
             Get multiple owned virtual items inventory data by app ids
             </summary>
             <param name="appIds"></param>
-            <param name="startAfter"></param>
+            <param name="startAfter">An optional parameter representing an inventory items 'updatedAt' field after which start the retrieval</param>
             <param name="limit"></param>
             <param name="cancellationToken">A token to cancel the operation.</param>
             <returns></returns>
         </member>
-        <member name="M:RGN.Modules.Inventory.InventoryModule.GetWithVirtualItemsDataForCurrentAppAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:RGN.Modules.Inventory.InventoryModule.GetWithVirtualItemsDataForCurrentAppAsync(System.Int64,System.Int32,System.Threading.CancellationToken)">
             <summary>
             Get multiple owned virtual items inventory data for current app with the Virtual Item data included
             </summary>
-            <param name="startAfter">The ownedItemId to start after</param>
+            <param name="startAfter">An optional parameter representing an inventory items 'updatedAt' field after which start the retrieval</param>
             <param name="limit">The maximum number of items to return</param>
             <param name="cancellationToken">A token to cancel the operation.</param>
             <returns></returns>
         </member>
-        <member name="M:RGN.Modules.Inventory.InventoryModule.GetWithVirtualItemsDataByAppIdsAsync(System.Collections.Generic.List{System.String},System.String,System.Int32,System.Threading.CancellationToken)">
+        <member name="M:RGN.Modules.Inventory.InventoryModule.GetWithVirtualItemsDataByAppIdsAsync(System.Collections.Generic.List{System.String},System.Int64,System.Int32,System.Threading.CancellationToken)">
             <summary>
             Get multiple owned virtual items inventory data by app ids with the Virtual Item data included
             </summary>
             <param name="appIds"></param>
-            <param name="startAfter"></param>
+            <param name="startAfter">An optional parameter representing an inventory items 'updatedAt' field after which start the retrieval</param>
             <param name="limit"></param>
             <param name="cancellationToken">A token to cancel the operation.</param>
             <returns></returns>
