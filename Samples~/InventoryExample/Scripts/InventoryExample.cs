@@ -8,6 +8,11 @@ using UnityEngine;
 
 namespace RGN.Samples
 {
+    public interface IInventoryExampleClient
+    {
+        void OpenMarketpace();
+    }
+
     public class InventoryExample : IUIScreen, IMessageReceiver
     {
         [SerializeField] private CanvasGroup _canvasGroup;
@@ -20,6 +25,7 @@ namespace RGN.Samples
 
         private List<InventoryItemUI> _inventoryItems;
         private bool _triedToLoad;
+        private IInventoryExampleClient _inventoryExampleClient;
 
         public override void PreInit(IRGNFrame rgnFrame)
         {
@@ -47,6 +53,11 @@ namespace RGN.Samples
             await ReloadVirtualItemsAsync();
         }
 
+        public void SetInventoryExampleClient(IInventoryExampleClient inventoryExampleClient)
+        {
+            _inventoryExampleClient = inventoryExampleClient;
+        }
+
         private void SetUIInteractable(bool interactable)
         {
             _canvasGroup.interactable = interactable;
@@ -56,7 +67,7 @@ namespace RGN.Samples
         private Task ReloadVirtualItemsAsync()
         {
             DisposeVirtualItems();
-            return LoadItemsAsync(string.Empty);
+            return LoadItemsAsync(default);
         }
         private void DisposeVirtualItems()
         {
@@ -72,14 +83,14 @@ namespace RGN.Samples
         }
         private async void OnLoadMoreItemsButtonAsync()
         {
-            string lastLoadedInventoryItemId = string.Empty;
+            long lastLoadedInventoryItemUpdatedAt = default;
             if (_inventoryItems.Count > 0)
             {
-                lastLoadedInventoryItemId = _inventoryItems[_inventoryItems.Count - 1].Id;
+                lastLoadedInventoryItemUpdatedAt = _inventoryItems[_inventoryItems.Count - 1].UpdatedAt;
             }
-            await LoadItemsAsync(lastLoadedInventoryItemId);
+            await LoadItemsAsync(lastLoadedInventoryItemUpdatedAt);
         }
-        private async Task LoadItemsAsync(string startAfter)
+        private async Task LoadItemsAsync(long startAfter)
         {
             SetUIInteractable(false);
             _triedToLoad = true;
@@ -87,7 +98,7 @@ namespace RGN.Samples
             for (int i = 0; i < inventoryItems.Count; ++i)
             {
                 InventoryItemUI ui = Instantiate(_inventoryItemPrefab, _scrollContentRectTrasform);
-                ui.Init(_rgnFrame, _inventoryItems.Count, inventoryItems[i]);
+                ui.Init(_rgnFrame, _inventoryItems.Count, inventoryItems[i], _inventoryExampleClient);
                 _inventoryItems.Add(ui);
             }
             float loadMoreItemsButtonPos = _inventoryItems.Count * _inventoryItemPrefab.GetHeight();

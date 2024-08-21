@@ -10,7 +10,8 @@ namespace RGN.Samples
 {
     internal sealed class InventoryItemUI : MonoBehaviour, System.IDisposable
     {
-        public string Id { get => _inventoryItemData.id; }
+        public string Id => _inventoryItemData.id;
+        public long UpdatedAt => _inventoryItemData.updatedAt;
 
         [SerializeField] private RectTransform _rectTransform;
         [SerializeField] private TextMeshProUGUI _inventoryItemIdText;
@@ -29,14 +30,17 @@ namespace RGN.Samples
         private InventoryItemData _inventoryItemData;
         private VirtualItem _virtualItem;
         private bool _disposed = false;
+        private IInventoryExampleClient _inventoryExampleClient;
 
         internal void Init(
             Impl.Firebase.IRGNFrame rgnFrame,
             int index,
-            InventoryItemData inventoryItemData)
+            InventoryItemData inventoryItemData,
+            IInventoryExampleClient inventoryExampleClient)
         {
             _rgnFrame = rgnFrame;
             _inventoryItemData = inventoryItemData;
+            _inventoryExampleClient = inventoryExampleClient;
             _virtualItem = inventoryItemData.GetVirtualItem();
             _rectTransform.localPosition = new Vector3(0, -index * GetHeight(), 0);
             _inventoryItemIdText.text = inventoryItemData.id;
@@ -76,7 +80,7 @@ namespace RGN.Samples
         private void OnOpenVirtualItemScreenButtonClick()
         {
             _rgnFrame.OpenScreen<InventoryItemScreen>(
-                new InventoryItemScreenParameters(_inventoryItemData));
+                new InventoryItemScreenParameters(_inventoryItemData, _inventoryExampleClient));
         }
     }
 }
