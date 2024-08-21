@@ -8,6 +8,11 @@ using UnityEngine;
 
 namespace RGN.Samples
 {
+    public interface IInventoryExampleClient
+    {
+        void OpenMarketpace();
+    }
+
     public class InventoryExample : IUIScreen, IMessageReceiver
     {
         [SerializeField] private CanvasGroup _canvasGroup;
@@ -20,6 +25,7 @@ namespace RGN.Samples
 
         private List<InventoryItemUI> _inventoryItems;
         private bool _triedToLoad;
+        private IInventoryExampleClient _inventoryExampleClient;
 
         public override void PreInit(IRGNFrame rgnFrame)
         {
@@ -45,6 +51,11 @@ namespace RGN.Samples
                 return;
             }
             await ReloadVirtualItemsAsync();
+        }
+
+        public void SetInventoryExampleClient(IInventoryExampleClient inventoryExampleClient)
+        {
+            _inventoryExampleClient = inventoryExampleClient;
         }
 
         private void SetUIInteractable(bool interactable)
@@ -87,7 +98,7 @@ namespace RGN.Samples
             for (int i = 0; i < inventoryItems.Count; ++i)
             {
                 InventoryItemUI ui = Instantiate(_inventoryItemPrefab, _scrollContentRectTrasform);
-                ui.Init(_rgnFrame, _inventoryItems.Count, inventoryItems[i]);
+                ui.Init(_rgnFrame, _inventoryItems.Count, inventoryItems[i], _inventoryExampleClient);
                 _inventoryItems.Add(ui);
             }
             float loadMoreItemsButtonPos = _inventoryItems.Count * _inventoryItemPrefab.GetHeight();

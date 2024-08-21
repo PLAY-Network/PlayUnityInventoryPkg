@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using RGN.Impl.Firebase;
@@ -15,10 +14,12 @@ namespace RGN.Samples
     internal sealed class InventoryItemScreenParameters
     {
         internal InventoryItemData InventoryItemData { get; }
+        internal IInventoryExampleClient InventoryExampleClient { get; }
 
-        internal InventoryItemScreenParameters(InventoryItemData inventoryItemData)
+        internal InventoryItemScreenParameters(InventoryItemData inventoryItemData, IInventoryExampleClient inventoryExampleClient)
         {
             InventoryItemData = inventoryItemData;
+            InventoryExampleClient = inventoryExampleClient;
         }
     }
 
@@ -47,22 +48,27 @@ namespace RGN.Samples
         [SerializeField] private TextMeshProUGUI _inventoryItemQuantityText;
         [SerializeField] private TextMeshProUGUI _inventoryItemUpgradesText;
         [SerializeField] private TextMeshProUGUI _inventoryItemPropertiesText;
+        [SerializeField] private UnityEngine.UI.Button _openMarketPlaceButton;
 
         private InventoryItemData _inventoryItemData;
         private VirtualItem _virtualItem;
+        private IInventoryExampleClient _inventoryExampleClient;
 
         public override void PreInit(IRGNFrame rgnFrame)
         {
             base.PreInit(rgnFrame);
+            _openMarketPlaceButton.onClick.AddListener(OnOpenMarkeplaceButtonClick);
         }
         protected override void Dispose(bool disposing)
         {
+            _openMarketPlaceButton.onClick.RemoveListener(OnOpenMarkeplaceButtonClick);
             base.Dispose(disposing);
         }
         public override async void OnWillAppearNow(object parameters)
         {
             var castedParams = parameters as InventoryItemScreenParameters;
             _inventoryItemData = castedParams.InventoryItemData;
+            _inventoryExampleClient = castedParams.InventoryExampleClient;
             _virtualItem = _inventoryItemData.GetVirtualItem();
             if (_inventoryItemData == null)
             {
@@ -130,6 +136,19 @@ namespace RGN.Samples
             _virtualItemIconImage.SetProfileTexture(image);
             _canvasGroup.interactable = true;
             _virtualItemIconImage.SetLoading(false);
+        }
+        private void OnOpenMarkeplaceButtonClick()
+        {
+            if (_inventoryExampleClient == null)
+            {
+                string message = "Please open the UIRoot Sample from Firebase Impl package to use this functionality";
+                Debug.LogError(message);
+                ToastMessage.I.Show(message);
+                _fullScreenLoadingIndicator.SetEnabled(false);
+                _canvasGroup.interactable = true;
+                return;
+            }
+            _inventoryExampleClient.OpenMarketpace();
         }
     }
 }
