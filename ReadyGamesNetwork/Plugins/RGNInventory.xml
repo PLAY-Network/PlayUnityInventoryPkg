@@ -28,7 +28,7 @@
             Please use the <see cref="M:RGN.Modules.Inventory.InventoryModule.ParseInventoryItemsData(System.String)"/> method to parse the message payload
             </summary>
         </member>
-        <member name="M:RGN.Modules.Inventory.InventoryModule.AddToInventoryAsync(System.String,System.Int32,RGN.Modules.VirtualItems.Properties,System.Threading.CancellationToken)">
+        <member name="M:RGN.Modules.Inventory.InventoryModule.AddToInventoryAsync(System.String,System.Int32,RGN.Model.Properties,System.Threading.CancellationToken)">
             <summary>
             Asynchronously adds a specified quantity of a virtual item to the current logged in user's inventory.
             </summary>
@@ -42,7 +42,7 @@
             </returns>
             <exception cref="T:System.InvalidOperationException">Thrown when the user is not logged in.</exception>
         </member>
-        <member name="M:RGN.Modules.Inventory.InventoryModule.AddToInventoryAsync(System.String,System.String,System.Int32,RGN.Modules.VirtualItems.Properties,System.Threading.CancellationToken)">
+        <member name="M:RGN.Modules.Inventory.InventoryModule.AddToInventoryAsync(System.String,System.String,System.Int32,RGN.Model.Properties,System.Threading.CancellationToken)">
             <summary>
             Asynchronously adds a specified quantity of a virtual item to the inventory for a specified user.
             </summary>
@@ -374,7 +374,7 @@
             <param name="virtualItemId">The unique identifier of the virtual item to be added.</param>
             <param name="appIds">The list of application identifiers where this item is used.</param>
         </member>
-        <member name="M:RGN.Modules.Inventory.InventoryItemData.#ctor(System.String,System.Collections.Generic.List{System.String},System.Int32,RGN.Modules.VirtualItems.Properties)">
+        <member name="M:RGN.Modules.Inventory.InventoryItemData.#ctor(System.String,System.Collections.Generic.List{System.String},System.Int32,RGN.Model.Properties)">
             <summary>
             Constructs an instance of InventoryItemData using the specified virtual item id, application ids, quantity, and properties.
             </summary>
