@@ -10,20 +10,20 @@
             Virtual items are referenced by the inventory data.
             </summary>
         </member>
-        <member name="F:RGN.Modules.Inventory.InventoryModule.ITEM_ADDED_EVENT_TOPIC">
+        <member name="F:RGN.Modules.Inventory.InventoryModule.ITEM_ADDED_EVENT_CHANNEL">
             <summary>
-            This topic event is fired for signed in user when a new inventory item
+            This channel event is fired for signed in user when a new inventory item
             is added to the users inventory. It is not fired when the user purchases an item.
-            Name of the topic for MessagingModule to subscribe on.
+            Name of the channel for MessagingModule to subscribe on.
             You can use MessagingModule to subscribe on this event.
             Please use the <see cref="M:RGN.Modules.Inventory.InventoryModule.ParseInventoryItemData(System.String)"/> method to parse the message payload
             </summary>
         </member>
-        <member name="F:RGN.Modules.Inventory.InventoryModule.ITEM_REMOVED_EVENT_TOPIC">
+        <member name="F:RGN.Modules.Inventory.InventoryModule.ITEM_REMOVED_EVENT_CHANNEL">
             <summary>
-            This topic event is fired for signed in user when an inventory item is removed
+            This channel event is fired for signed in user when an inventory item is removed
             from the users inventory.
-            Name of the topic for MessagingModule to subscribe on.
+            Name of the channel for MessagingModule to subscribe on.
             You can use MessagingModule to subscribe on this event.
             Please use the <see cref="M:RGN.Modules.Inventory.InventoryModule.ParseInventoryItemsData(System.String)"/> method to parse the message payload
             </summary>
