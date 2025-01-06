@@ -1,2 +1,2 @@
 # Play SDK Inventory
-Package version: 0.16.0-dev.5
+Package version: 0.16.0-dev.6
